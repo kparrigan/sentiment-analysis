@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NaiveSentimentAnalyzer.cs" />
+    <Compile Include="NormalizedNaiveSentimentAnalyzer.cs" />
+    <Compile Include="RawNaiveSentimentAnalyzer.cs" />
     <Compile Include="IAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

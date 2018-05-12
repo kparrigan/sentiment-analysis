@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SentimentAnalysis
 {
-    public class NaiveSentimentAnalyzer : ISentinmentAnalyzer
+    public sealed class NormalizedNaiveSentimentAnalyzer
     {
         private readonly Dictionary<string, int> _sentimentScores;
 
-        public NaiveSentimentAnalyzer(Dictionary<string, int> sentimentScores)
+        public NormalizedNaiveSentimentAnalyzer(Dictionary<string, int> sentimentScores)
         {
             if (sentimentScores == null || !sentimentScores.Any())
             {
@@ -24,6 +23,7 @@ namespace SentimentAnalysis
         public double GetSentimentScore(string text)
         {
             var score = 0;
+            var count = 0;
 
             if (string.IsNullOrWhiteSpace(text))
             {
@@ -32,15 +32,16 @@ namespace SentimentAnalysis
 
             var words = text.Split(' ');
 
-            foreach(var word in words)
+            foreach (var word in words)
             {
                 if (_sentimentScores.ContainsKey(word))
                 {
+                    count++;
                     score += _sentimentScores[word];
                 }
             }
 
-            return score;
+            return (double)score / count;
         }
     }
 }

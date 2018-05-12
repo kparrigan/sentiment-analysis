@@ -5,14 +5,14 @@ using System.Collections.Generic;
 namespace SentimentAnalysis.Test
 {
     [TestClass]
-    public class NaiveSentimentAnalyzerTests
+    public class NormalizedNaiveSentimentAnalyzerTests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void CanHandleNullSentimentDictionary()
         {
 
-            var analyzer = new NaiveSentimentAnalyzer(null);
+            var analyzer = new NormalizedNaiveSentimentAnalyzer(null);
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace SentimentAnalysis.Test
         public void CanHandleEmptySentimentDictionary()
         {
 
-            var analyzer = new NaiveSentimentAnalyzer(new Dictionary<string, int>());
+            var analyzer = new NormalizedNaiveSentimentAnalyzer(new Dictionary<string, int>());
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace SentimentAnalysis.Test
                 { "foo", -1 }
             };
 
-            var analyzer = new NaiveSentimentAnalyzer(scoreDictionary);
+            var analyzer = new NormalizedNaiveSentimentAnalyzer(scoreDictionary);
 
             Assert.AreEqual(0, analyzer.GetSentimentScore(""));
         }
@@ -45,9 +45,9 @@ namespace SentimentAnalysis.Test
                 { "bar", 2 }
             };
 
-            var analyzer = new NaiveSentimentAnalyzer(scoreDictionary);
+            var analyzer = new NormalizedNaiveSentimentAnalyzer(scoreDictionary);
 
-            Assert.AreEqual(3, analyzer.GetSentimentScore("foo bar"));
+            Assert.AreEqual(1.5, analyzer.GetSentimentScore("foo bar"));
         }
 
         [TestMethod]
@@ -59,9 +59,9 @@ namespace SentimentAnalysis.Test
                 { "bar", -2 }
             };
 
-            var analyzer = new NaiveSentimentAnalyzer(scoreDictionary);
+            var analyzer = new NormalizedNaiveSentimentAnalyzer(scoreDictionary);
 
-            Assert.AreEqual(-3, analyzer.GetSentimentScore("foo bar"));
+            Assert.AreEqual(-1.5d, analyzer.GetSentimentScore("foo bar"));
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace SentimentAnalysis.Test
                 { "bar", 1 }
             };
 
-            var analyzer = new NaiveSentimentAnalyzer(scoreDictionary);
+            var analyzer = new NormalizedNaiveSentimentAnalyzer(scoreDictionary);
 
             Assert.AreEqual(0, analyzer.GetSentimentScore("foo bar"));
         }

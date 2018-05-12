@@ -48,7 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NaiveSentimentAnalyzerTests.cs" />
+    <Compile Include="NormalizedNaiveSentimentAnalyzerTests.cs" />
+    <Compile Include="RawNaiveSentimentAnalyzerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
